@@ -1,0 +1,22 @@
+{
+  "name": "vault-crypto",
+  "version": "0.1.0",
+  "description": "Client-side hybrid PQC + WebAuthn + AES-GCM + Shamir crypto suite for a zero-knowledge vault",
+  "main": "dist/crypto-suite.js",
+  "types": "dist/crypto-suite.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@noble/curves": "^1.6.0",
+    "@noble/post-quantum": "^0.2.2",
+    "hash-wasm": "^4.11.0",
+    "shamirs-secret-sharing": "^2.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0",
+    "@types/node": "^22.7.0"
+  }
+}

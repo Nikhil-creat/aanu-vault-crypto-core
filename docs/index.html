@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AANU Vault</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#12141A; --panel:#1B1E27; --panel-2:#20232E; --line:#2B2F3B;
+    --brass:#C9A15F; --brass-dim:#8A733F; --sage:#6E9B7C; --sage-dim:#4E6F5A;
+    --paper:#E8E6E1; --muted:#7A8090; --danger:#C77361;
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; background:var(--ink); color:var(--paper); font-family:'IBM Plex Sans',sans-serif; }
+  h1,h2,h3 { font-family:'Fraunces',serif; font-weight:500; margin:0; }
+  .mono { font-family:'IBM Plex Mono',monospace; }
+  .app { display:grid; grid-template-columns:260px 1fr; min-height:100vh; }
+  .rail { background:var(--panel); border-right:1px solid var(--line); padding:28px 22px; display:flex; flex-direction:column; }
+  .brand { display:flex; align-items:center; gap:10px; margin-bottom:36px; }
+  .dial { width:34px; height:34px; border-radius:50%; border:2px solid var(--brass); position:relative; flex-shrink:0; }
+  .dial::after { content:''; position:absolute; top:3px; left:50%; width:2px; height:11px; background:var(--brass); transform:translateX(-50%); }
+  .brand h1 { font-size:1.15rem; letter-spacing:0.01em; }
+  .brand span { display:block; font-size:0.7rem; color:var(--muted); font-family:'IBM Plex Sans'; margin-top:2px; }
+  nav { display:flex; flex-direction:column; gap:2px; }
+  .navitem { padding:10px 12px; border-radius:6px; color:var(--muted); font-size:0.9rem; cursor:pointer; border-left:2px solid transparent; }
+  .navitem:hover { color:var(--paper); background:var(--panel-2); }
+  .navitem.active { color:var(--paper); background:var(--panel-2); border-left:2px solid var(--brass); }
+  .rail-foot { margin-top:auto; padding-top:20px; border-top:1px solid var(--line); font-size:0.78rem; color:var(--muted); line-height:1.6; }
+  .rail-foot .dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--sage); margin-right:6px; }
+  main { padding:36px 44px; max-width:980px; }
+  .pagehead { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:28px; flex-wrap:wrap; gap:12px; }
+  .pagehead h2 { font-size:1.6rem; }
+  .pagehead p { color:var(--muted); font-size:0.88rem; margin-top:6px; }
+  .btn { font-family:'IBM Plex Sans'; font-size:0.85rem; padding:9px 16px; border-radius:6px; border:1px solid var(--line); background:transparent; color:var(--paper); cursor:pointer; }
+  .btn:hover { border-color:var(--brass-dim); }
+  .btn.primary { background:var(--brass); border-color:var(--brass); color:#241D0E; font-weight:500; }
+  .btn.primary:hover { background:#d4ac6c; }
+  .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-bottom:32px; }
+  .stat { background:var(--panel); padding:18px 20px; }
+  .stat .label { font-size:0.75rem; color:var(--muted); }
+  .stat .value { font-family:'Fraunces',serif; font-size:1.6rem; margin-top:6px; }
+  .stat .value.brass { color:var(--brass); } .stat .value.sage { color:var(--sage); }
+  .ledger { border-top:1px solid var(--line); }
+  .row { display:grid; grid-template-columns:28px 1.4fr 1fr 100px 90px; align-items:center; padding:14px 0; border-bottom:1px solid var(--line); font-size:0.87rem; }
+  .row.head { color:var(--muted); font-size:0.72rem; padding-bottom:10px; }
+  .row .icon { width:20px; height:20px; border-radius:4px; background:var(--panel-2); display:flex; align-items:center; justify-content:center; font-size:0.7rem; color:var(--brass); }
+  .row .name { font-weight:500; }
+  .row .meta { color:var(--muted); font-size:0.8rem; margin-top:2px; }
+  .row .hash { color:var(--muted); font-size:0.78rem; }
+  .tag { display:inline-block; padding:2px 9px; border-radius:20px; font-size:0.72rem; }
+  .tag.verified { background:rgba(110,155,124,0.15); color:var(--sage); }
+  .tag.shredded { background:rgba(199,115,97,0.15); color:var(--danger); }
+  .row .action { color:var(--muted); font-size:0.8rem; text-align:right; cursor:pointer; }
+  .row .action:hover { color:var(--paper); }
+  .panel-note { margin-top:28px; padding:16px 18px; border:1px solid var(--line); border-left:2px solid var(--sage); background:var(--panel); font-size:0.84rem; color:var(--muted); line-height:1.6; }
+  .panel-note strong { color:var(--paper); font-weight:500; }
+  .hidden { display:none; }
+  .unlock-wrap { min-height:100vh; display:flex; align-items:center; justify-content:center; background:var(--ink); }
+  .unlock-card { width:380px; text-align:center; padding:0 20px; }
+  .unlock-card .dial-big { width:64px; height:64px; border-radius:50%; border:2px solid var(--brass); margin:0 auto 22px; position:relative; }
+  .unlock-card .dial-big::after { content:''; position:absolute; top:6px; left:50%; width:2px; height:20px; background:var(--brass); transform:translateX(-50%); }
+  .unlock-card h1 { font-size:1.5rem; margin-bottom:6px; }
+  .unlock-card p.sub { color:var(--muted); font-size:0.86rem; margin-bottom:28px; }
+  .field { text-align:left; margin-bottom:16px; }
+  .field label { font-size:0.78rem; color:var(--muted); display:block; margin-bottom:6px; }
+  .field input { width:100%; background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:11px 12px; color:var(--paper); font-family:'IBM Plex Mono'; font-size:0.85rem; }
+  .field input:focus { outline:none; border-color:var(--brass-dim); }
+  .unlock-btn { width:100%; margin-top:6px; padding:12px; }
+  .altauth { margin-top:18px; font-size:0.8rem; color:var(--muted); }
+  .altauth a { color:var(--brass); text-decoration:none; cursor:pointer; }
+  @media (max-width:780px) {
+    .app { grid-template-columns:1fr; }
+    .rail { display:none; }
+    main { padding:24px; }
+    .row { grid-template-columns:24px 1fr 90px; }
+    .row .meta, .row .hash { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="unlock" class="unlock-wrap">
+  <div class="unlock-card">
+    <div class="dial-big"></div>
+    <h1>AANU Vault</h1>
+    <p class="sub">Your data is encrypted before it ever leaves this device.</p>
+    <div class="field">
+      <label>Vault username</label>
+      <input type="text" value="n.sriramoju" />
+    </div>
+    <div class="field">
+      <label>Passphrase</label>
+      <input type="password" value="password123demo" />
+    </div>
+    <button class="btn primary unlock-btn" onclick="document.getElementById('unlock').classList.add('hidden'); document.getElementById('dashboard').classList.remove('hidden');">Unlock vault</button>
+    <div class="altauth">or <a>unlock with a passkey</a></div>
+  </div>
+</div>
+
+<div id="dashboard" class="app hidden">
+  <aside class="rail">
+    <div class="brand">
+      <div class="dial"></div>
+      <div>
+        <h1>AANU</h1>
+        <span>Zero-knowledge vault</span>
+      </div>
+    </div>
+    <nav>
+      <div class="navitem active">Records</div>
+      <div class="navitem">Audit ledger</div>
+      <div class="navitem">Recovery guardians</div>
+      <div class="navitem">Keys and devices</div>
+      <div class="navitem">Settings</div>
+    </nav>
+    <div class="rail-foot">
+      <div><span class="dot"></span>Ledger verified</div>
+      <div style="margin-top:4px;">Merkle root confirmed 2 min ago</div>
+    </div>
+  </aside>
+
+  <main>
+    <div class="pagehead">
+      <div>
+        <h2>Records</h2>
+        <p>Everything below is opaque to the server — only your device holds the keys.</p>
+      </div>
+      <button class="btn primary">Store new record</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="label">Records stored</div><div class="value brass">247</div></div>
+      <div class="stat"><div class="label">Guardians configured</div><div class="value">3 of 5</div></div>
+      <div class="stat"><div class="label">Ledger status</div><div class="value sage">Intact</div></div>
+    </div>
+
+    <div class="ledger">
+      <div class="row head">
+        <div></div><div>Record</div><div>Ratchet position / tag</div><div>Status</div><div style="text-align:right;">Action</div>
+      </div>
+      <div class="row">
+        <div class="icon">&#9670;</div>
+        <div><div class="name">Passport scan</div><div class="meta">Stored 3 days ago</div></div>
+        <div class="hash">step 0192 &middot; a1f3e9&hellip;</div>
+        <div><span class="tag verified">Verified</span></div>
+        <div class="action">Shred</div>
+      </div>
+      <div class="row">
+        <div class="icon">&#9670;</div>
+        <div><div class="name">Banking credentials</div><div class="meta">Stored 6 days ago</div></div>
+        <div class="hash">step 0187 &middot; 7bd201&hellip;</div>
+        <div><span class="tag verified">Verified</span></div>
+        <div class="action">Shred</div>
+      </div>
+      <div class="row">
+        <div class="icon">&#9670;</div>
+        <div><div class="name">Recovery seed phrase</div><div class="meta">Stored 12 days ago</div></div>
+        <div class="hash">step 0165 &middot; c99a44&hellip;</div>
+        <div><span class="tag verified">Verified</span></div>
+        <div class="action">Shred</div>
+      </div>
+      <div class="row">
+        <div class="icon">&#9670;</div>
+        <div><div class="name">Old API keys</div><div class="meta">Shredded 20 days ago</div></div>
+        <div class="hash">step 0091 &middot; &mdash;</div>
+        <div><span class="tag shredded">Shredded</span></div>
+        <div class="action" style="visibility:hidden;">Shred</div>
+      </div>
+    </div>
+
+    <div class="panel-note">
+      <strong>How this stays zero-knowledge:</strong> each record is encrypted client-side with a one-time key derived from a forward-secret ratchet before it ever reaches the network. The server stores ciphertext, a Merkle-audited hash of the action, and nothing else &mdash; it has no key capable of opening any row above.
+    </div>
+  </main>
+</div>
+
+</body>
+</html>
