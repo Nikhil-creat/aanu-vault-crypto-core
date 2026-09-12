@@ -18,7 +18,6 @@
   .mono { font-family:'IBM Plex Mono',monospace; }
   .hidden { display:none !important; }
 
-  /* ---- Unlock / Register ---- */
   .unlock-wrap { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
   .unlock-card { width:380px; max-width:100%; text-align:center; }
   .dial-big { width:64px; height:64px; border-radius:50%; border:2px solid var(--brass); margin:0 auto 20px; position:relative; }
@@ -33,14 +32,12 @@
   .btn:hover { border-color:var(--brass-dim); }
   .btn.primary { background:var(--brass); border-color:var(--brass); color:#241D0E; font-weight:500; }
   .btn.primary:hover { background:#d4ac6c; }
-  .btn.danger { border-color:var(--danger); color:var(--danger); }
   .switch-mode { margin-top:16px; font-size:0.8rem; color:var(--muted); }
   .switch-mode a { color:var(--brass); text-decoration:none; cursor:pointer; }
   .msg { font-size:0.82rem; padding:10px 12px; border-radius:6px; margin-bottom:14px; text-align:left; }
   .msg.error { background:rgba(199,115,97,0.12); color:var(--danger); border:1px solid rgba(199,115,97,0.3); }
   .msg.success { background:rgba(110,155,124,0.12); color:var(--sage); border:1px solid rgba(110,155,124,0.3); }
 
-  /* ---- Dashboard ---- */
   .app { display:grid; grid-template-columns:240px 1fr; min-height:100vh; }
   .rail { background:var(--panel); border-right:1px solid var(--line); padding:26px 20px; display:flex; flex-direction:column; }
   .brand { display:flex; align-items:center; gap:10px; margin-bottom:30px; }
@@ -50,31 +47,43 @@
   .brand span { display:block; font-size:0.68rem; color:var(--muted); margin-top:2px; }
   .rail-foot { margin-top:auto; padding-top:16px; border-top:1px solid var(--line); font-size:0.78rem; color:var(--muted); }
   main { padding:30px 36px; max-width:820px; }
-  .pagehead { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:22px; flex-wrap:wrap; gap:12px; }
+  .pagehead { margin-bottom:22px; }
   .pagehead h2 { font-size:1.4rem; }
   .pagehead p { color:var(--muted); font-size:0.85rem; margin-top:4px; }
 
-  .stats { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-bottom:26px; }
+  .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-bottom:26px; }
   .stat { background:var(--panel); padding:16px 18px; }
   .stat .label { font-size:0.72rem; color:var(--muted); }
-  .stat .value { font-family:'Fraunces',serif; font-size:1.4rem; margin-top:4px; color:var(--brass); }
+  .stat .value { font-family:'Fraunces',serif; font-size:1.3rem; margin-top:4px; color:var(--brass); }
+
+  .tabs { display:flex; gap:2px; margin-bottom:16px; background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden; width:fit-content; }
+  .tab { padding:9px 18px; background:var(--panel); color:var(--muted); font-size:0.84rem; cursor:pointer; }
+  .tab.active { background:var(--panel-2); color:var(--paper); }
 
   .add-form { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:18px; margin-bottom:26px; }
-  .add-form input, .add-form textarea { width:100%; background:var(--panel-2); border:1px solid var(--line); border-radius:6px; padding:10px 12px; color:var(--paper); font-family:'IBM Plex Sans'; font-size:0.87rem; margin-bottom:10px; }
+  .add-form input[type=text], .add-form textarea { width:100%; background:var(--panel-2); border:1px solid var(--line); border-radius:6px; padding:10px 12px; color:var(--paper); font-family:'IBM Plex Sans'; font-size:0.87rem; margin-bottom:10px; }
   .add-form textarea { min-height:80px; resize:vertical; font-family:'IBM Plex Mono'; font-size:0.82rem; }
+  .file-drop { border:1.5px dashed var(--line); border-radius:8px; padding:24px 16px; text-align:center; color:var(--muted); font-size:0.85rem; margin-bottom:10px; cursor:pointer; }
+  .file-drop:hover { border-color:var(--brass-dim); color:var(--paper); }
+  .file-drop input { display:none; }
+  .file-picked { font-size:0.82rem; color:var(--sage); margin-bottom:10px; }
+  .progress-wrap { height:4px; background:var(--panel-2); border-radius:4px; overflow:hidden; margin-bottom:10px; }
+  .progress-bar { height:100%; background:var(--brass); width:0%; transition:width 0.15s; }
 
   .ledger { border-top:1px solid var(--line); }
   .row { display:grid; grid-template-columns:1fr auto; gap:10px; align-items:start; padding:14px 0; border-bottom:1px solid var(--line); font-size:0.87rem; }
   .row .name { font-weight:500; }
   .row .meta { color:var(--muted); font-size:0.76rem; margin-top:2px; }
   .row .content { margin-top:8px; color:var(--paper); font-family:'IBM Plex Mono'; font-size:0.8rem; background:var(--panel); padding:10px; border-radius:6px; white-space:pre-wrap; word-break:break-word; }
-  .row .action { color:var(--danger); font-size:0.78rem; cursor:pointer; white-space:nowrap; }
+  .row .preview { margin-top:8px; max-width:100%; border-radius:6px; display:block; }
+  .row .preview.video { width:100%; }
+  .row-actions { display:flex; flex-direction:column; gap:6px; align-items:flex-end; }
+  .row .action { color:var(--brass); font-size:0.78rem; cursor:pointer; white-space:nowrap; }
+  .row .action.delete { color:var(--danger); }
   .empty-note { color:var(--muted); font-size:0.85rem; padding:24px 0; text-align:center; }
 
   .panel-note { margin-top:24px; padding:14px 16px; border:1px solid var(--line); border-left:2px solid var(--sage); background:var(--panel); font-size:0.8rem; color:var(--muted); line-height:1.6; }
   .panel-note strong { color:var(--paper); font-weight:500; }
-  .topbar { display:flex; justify-content:flex-end; padding:14px 20px 0; }
-  .topbar .btn { width:auto; padding:8px 14px; font-size:0.8rem; }
 
   @media (max-width:780px) {
     .app { grid-template-columns:1fr; }
@@ -86,58 +95,35 @@
 </head>
 <body>
 
-<!-- ===================== UNLOCK / REGISTER ===================== -->
 <div id="authScreen" class="unlock-wrap">
   <div class="unlock-card">
     <div class="dial-big"></div>
     <h1>AANU Vault</h1>
     <p class="sub">Your data is encrypted in this browser before it's ever stored. No server, no plaintext, no backdoor — if you lose your passphrase, the data is gone forever.</p>
-
     <div id="authMsg"></div>
 
-    <!-- LOGIN FORM -->
     <div id="loginForm">
-      <div class="field">
-        <label>Vault username</label>
-        <input type="text" id="loginUsername" autocomplete="username" />
-      </div>
-      <div class="field">
-        <label>Passphrase</label>
-        <input type="password" id="loginPassphrase" autocomplete="current-password" />
-      </div>
+      <div class="field"><label>Vault username</label><input type="text" id="loginUsername" autocomplete="username" /></div>
+      <div class="field"><label>Passphrase</label><input type="password" id="loginPassphrase" autocomplete="current-password" /></div>
       <button class="btn primary" onclick="handleLogin()">Unlock vault</button>
       <div class="switch-mode">No vault yet? <a onclick="showRegister()">Create one</a></div>
     </div>
 
-    <!-- REGISTER FORM -->
     <div id="registerForm" class="hidden">
-      <div class="field">
-        <label>Choose a vault username</label>
-        <input type="text" id="regUsername" autocomplete="username" />
-      </div>
-      <div class="field">
-        <label>Choose a passphrase (min 8 characters)</label>
-        <input type="password" id="regPassphrase" autocomplete="new-password" />
-      </div>
-      <div class="field">
-        <label>Confirm passphrase</label>
-        <input type="password" id="regPassphrase2" autocomplete="new-password" />
-      </div>
+      <div class="field"><label>Choose a vault username</label><input type="text" id="regUsername" autocomplete="username" /></div>
+      <div class="field"><label>Choose a passphrase (min 8 characters)</label><input type="password" id="regPassphrase" autocomplete="new-password" /></div>
+      <div class="field"><label>Confirm passphrase</label><input type="password" id="regPassphrase2" autocomplete="new-password" /></div>
       <button class="btn primary" onclick="handleRegister()">Create vault</button>
       <div class="switch-mode">Already have a vault? <a onclick="showLogin()">Unlock it</a></div>
     </div>
   </div>
 </div>
 
-<!-- ===================== DASHBOARD ===================== -->
 <div id="dashboard" class="app hidden">
   <aside class="rail">
     <div class="brand">
       <div class="dial"></div>
-      <div>
-        <h1>AANU</h1>
-        <span>Zero-knowledge vault</span>
-      </div>
+      <div><h1>AANU</h1><span>Zero-knowledge vault</span></div>
     </div>
     <div class="rail-foot">
       <div>Logged in as <span id="currentUserLabel" class="mono"></span></div>
@@ -147,108 +133,139 @@
 
   <main>
     <div class="pagehead">
-      <div>
-        <h2>Records</h2>
-        <p>Decrypted only in this browser, only while unlocked.</p>
-      </div>
+      <h2>Records</h2>
+      <p>Decrypted only in this browser, only while unlocked.</p>
     </div>
 
     <div class="stats">
       <div class="stat"><div class="label">Records stored</div><div class="value" id="recordCount">0</div></div>
-      <div class="stat"><div class="label">Encryption</div><div class="value" style="font-size:1rem;">AES-256-GCM</div></div>
+      <div class="stat"><div class="label">Storage used</div><div class="value" id="storageUsed" style="font-size:1.1rem;">0 KB</div></div>
+      <div class="stat"><div class="label">Encryption</div><div class="value" style="font-size:0.95rem;">AES-256-GCM</div></div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" id="tabNote" onclick="switchTab('note')">Add note</div>
+      <div class="tab" id="tabFile" onclick="switchTab('file')">Upload file</div>
     </div>
 
     <div class="add-form">
-      <input type="text" id="newRecordTitle" placeholder="Title (e.g. Bank PIN, WiFi password)" />
-      <textarea id="newRecordContent" placeholder="The data you want encrypted and stored..."></textarea>
-      <button class="btn primary" onclick="handleAddRecord()">Encrypt and store</button>
+      <div id="noteFields">
+        <input type="text" id="newRecordTitle" placeholder="Title (e.g. Bank PIN, WiFi password)" />
+        <textarea id="newRecordContent" placeholder="The data you want encrypted and stored..."></textarea>
+        <button class="btn primary" onclick="handleAddNote()">Encrypt and store</button>
+      </div>
+
+      <div id="fileFields" class="hidden">
+        <div class="file-drop" onclick="document.getElementById('fileInput').click()">
+          <div id="fileDropLabel">Tap to choose a photo, video, or document</div>
+          <input type="file" id="fileInput" onchange="handleFilePicked()" />
+        </div>
+        <div id="filePickedInfo" class="file-picked hidden"></div>
+        <div id="progressWrap" class="progress-wrap hidden"><div class="progress-bar" id="progressBar"></div></div>
+        <button class="btn primary" id="uploadBtn" onclick="handleAddFile()" disabled>Encrypt and upload</button>
+      </div>
     </div>
 
     <div class="ledger" id="recordList"></div>
-    <div id="emptyNote" class="empty-note hidden">No records yet. Add one above — it will be encrypted before it touches storage.</div>
+    <div id="emptyNote" class="empty-note hidden">No records yet. Add a note or upload a file above.</div>
 
     <div class="panel-note">
-      <strong>How this stays zero-knowledge:</strong> your passphrase never leaves this browser and is never stored anywhere. It's run through PBKDF2 (600,000 iterations) to derive an AES-256 key, which encrypts every record with a fresh random IV. Only ciphertext sits in local storage — without your exact passphrase, that ciphertext is mathematically meaningless.
+      <strong>How this stays zero-knowledge:</strong> your passphrase never leaves this browser and is never stored anywhere. It's run through PBKDF2 (600,000 iterations) to derive an AES-256 key, which encrypts every note and file with a fresh random IV before it touches IndexedDB. Files are read, encrypted, and stored as ciphertext blobs — decrypted back to a viewable file only in memory, only while your vault is unlocked.
     </div>
   </main>
 </div>
 
 <script>
-/* =========================================================================
-   AANU Vault — client-side crypto engine
-   Real primitives, all native WebCrypto (audited, not hand-rolled):
-     - PBKDF2-SHA256, 600,000 iterations, per-vault random salt
-     - AES-256-GCM, random 96-bit IV per record
-   Storage: browser localStorage, namespaced per vault username.
-   Nothing here ever talks to a server — there is no server.
-   ========================================================================= */
-
 const PBKDF2_ITERATIONS = 600000;
-const STORAGE_PREFIX = "aanu_vault_";
+const DB_NAME = "aanu_vault_db";
+const DB_VERSION = 1;
+const META_STORAGE_PREFIX = "aanu_vault_meta_";
 
 let currentUsername = null;
-let currentKey = null; // CryptoKey, held only in memory, only while unlocked
+let currentKey = null;
+let pickedFile = null;
+let db = null;
 
-// ---- encoding helpers ----
-function bytesToB64(bytes) {
-  let bin = "";
-  for (const b of bytes) bin += String.fromCharCode(b);
-  return btoa(bin);
+function openDb() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = (e) => {
+      const database = e.target.result;
+      if (!database.objectStoreNames.contains("records")) {
+        const store = database.createObjectStore("records", { keyPath: "id" });
+        store.createIndex("username", "username", { unique: false });
+      }
+    };
+    req.onsuccess = (e) => resolve(e.target.result);
+    req.onerror = (e) => reject(e.target.error);
+  });
 }
-function b64ToBytes(b64) {
-  const bin = atob(b64);
-  const bytes = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-  return bytes;
+function idbAdd(record) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction("records", "readwrite");
+    tx.objectStore("records").add(record);
+    tx.oncomplete = () => resolve();
+    tx.onerror = (e) => reject(e.target.error);
+  });
+}
+function idbDelete(id) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction("records", "readwrite");
+    tx.objectStore("records").delete(id);
+    tx.oncomplete = () => resolve();
+    tx.onerror = (e) => reject(e.target.error);
+  });
+}
+function idbGetAllForUser(username) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction("records", "readonly");
+    const idx = tx.objectStore("records").index("username");
+    const req = idx.getAll(IDBKeyRange.only(username));
+    req.onsuccess = () => resolve(req.result.sort((a, b) => b.createdAt.localeCompare(a.createdAt)));
+    req.onerror = (e) => reject(e.target.error);
+  });
 }
 
-// ---- key derivation ----
+function bytesToB64(bytes) { let bin = ""; for (const b of bytes) bin += String.fromCharCode(b); return btoa(bin); }
+function b64ToBytes(b64) { const bin = atob(b64); const bytes = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i); return bytes; }
+function formatBytes(n) {
+  if (n < 1024) return n + " B";
+  if (n < 1024 * 1024) return (n / 1024).toFixed(1) + " KB";
+  return (n / (1024 * 1024)).toFixed(1) + " MB";
+}
+
 async function deriveKey(passphrase, saltBytes) {
-  const baseKey = await crypto.subtle.importKey(
-    "raw", new TextEncoder().encode(passphrase), "PBKDF2", false, ["deriveKey"]
-  );
+  const baseKey = await crypto.subtle.importKey("raw", new TextEncoder().encode(passphrase), "PBKDF2", false, ["deriveKey"]);
   return crypto.subtle.deriveKey(
     { name: "PBKDF2", salt: saltBytes, iterations: PBKDF2_ITERATIONS, hash: "SHA-256" },
-    baseKey,
-    { name: "AES-GCM", length: 256 },
-    false,
-    ["encrypt", "decrypt"]
+    baseKey, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]
   );
 }
-
-// ---- AES-GCM encrypt/decrypt ----
 async function encryptString(key, plaintext) {
   const iv = crypto.getRandomValues(new Uint8Array(12));
-  const ciphertext = await crypto.subtle.encrypt(
-    { name: "AES-GCM", iv }, key, new TextEncoder().encode(plaintext)
-  );
+  const ciphertext = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, new TextEncoder().encode(plaintext));
   return { iv: bytesToB64(iv), ciphertext: bytesToB64(new Uint8Array(ciphertext)) };
 }
 async function decryptString(key, payload) {
-  const iv = b64ToBytes(payload.iv);
-  const ciphertext = b64ToBytes(payload.ciphertext);
+  const iv = b64ToBytes(payload.iv); const ciphertext = b64ToBytes(payload.ciphertext);
   const plaintextBuf = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ciphertext);
   return new TextDecoder().decode(plaintextBuf);
 }
+async function encryptBuffer(key, arrayBuffer) {
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const ciphertext = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, arrayBuffer);
+  return { iv, ciphertext: new Uint8Array(ciphertext) };
+}
+async function decryptBuffer(key, iv, ciphertextBytes) {
+  return crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ciphertextBytes);
+}
 
-// ---- vault metadata (per-username, stored locally) ----
-function vaultMetaKey(username) { return STORAGE_PREFIX + "meta_" + username; }
-function vaultRecordsKey(username) { return STORAGE_PREFIX + "records_" + username; }
-
+function vaultMetaKey(username) { return META_STORAGE_PREFIX + username; }
 function getVaultMeta(username) {
   const raw = localStorage.getItem(vaultMetaKey(username));
   return raw ? JSON.parse(raw) : null;
 }
 
-function getRecords(username) {
-  const raw = localStorage.getItem(vaultRecordsKey(username));
-  return raw ? JSON.parse(raw) : [];
-}
-function saveRecords(username, records) {
-  localStorage.setItem(vaultRecordsKey(username), JSON.stringify(records));
-}
-
-// ---- UI: auth screen ----
 function showRegister() {
   document.getElementById("loginForm").classList.add("hidden");
   document.getElementById("registerForm").classList.remove("hidden");
@@ -260,15 +277,13 @@ function showLogin() {
   document.getElementById("authMsg").innerHTML = "";
 }
 function showAuthMessage(text, type) {
-  document.getElementById("authMsg").innerHTML =
-    `<div class="msg ${type}">${text}</div>`;
+  document.getElementById("authMsg").innerHTML = `<div class="msg ${type}">${text}</div>`;
 }
 
 async function handleRegister() {
   const username = document.getElementById("regUsername").value.trim();
   const pass1 = document.getElementById("regPassphrase").value;
   const pass2 = document.getElementById("regPassphrase2").value;
-
   if (!username) return showAuthMessage("Choose a username.", "error");
   if (pass1.length < 8) return showAuthMessage("Passphrase must be at least 8 characters.", "error");
   if (pass1 !== pass2) return showAuthMessage("Passphrases don't match.", "error");
@@ -276,18 +291,8 @@ async function handleRegister() {
 
   const salt = crypto.getRandomValues(new Uint8Array(16));
   const key = await deriveKey(pass1, salt);
-
-  // Store a "verifier": a known plaintext encrypted with the derived key.
-  // On login, if this decrypts correctly, the passphrase was correct.
-  // The passphrase itself is NEVER stored, anywhere, in any form.
   const verifier = await encryptString(key, "AANU-VAULT-VERIFIED");
-
-  localStorage.setItem(vaultMetaKey(username), JSON.stringify({
-    salt: bytesToB64(salt),
-    verifier,
-    createdAt: new Date().toISOString(),
-  }));
-  saveRecords(username, []);
+  localStorage.setItem(vaultMetaKey(username), JSON.stringify({ salt: bytesToB64(salt), verifier, createdAt: new Date().toISOString() }));
 
   showAuthMessage("Vault created. You can unlock it now with your passphrase.", "success");
   showLogin();
@@ -297,23 +302,21 @@ async function handleRegister() {
 async function handleLogin() {
   const username = document.getElementById("loginUsername").value.trim();
   const passphrase = document.getElementById("loginPassphrase").value;
-
   const meta = getVaultMeta(username);
   if (!meta) return showAuthMessage("No vault found for that username on this device.", "error");
 
   const salt = b64ToBytes(meta.salt);
   const key = await deriveKey(passphrase, salt);
-
   try {
     const decrypted = await decryptString(key, meta.verifier);
     if (decrypted !== "AANU-VAULT-VERIFIED") throw new Error("mismatch");
   } catch (e) {
-    // AES-GCM auth tag fails to verify with the wrong key -> decrypt throws.
     return showAuthMessage("Incorrect passphrase.", "error");
   }
 
   currentUsername = username;
   currentKey = key;
+  if (!db) db = await openDb();
   document.getElementById("authScreen").classList.add("hidden");
   document.getElementById("dashboard").classList.remove("hidden");
   document.getElementById("currentUserLabel").textContent = username;
@@ -322,82 +325,58 @@ async function handleLogin() {
 
 function handleLock() {
   currentUsername = null;
-  currentKey = null; // wipe the in-memory key
+  currentKey = null;
+  pickedFile = null;
   document.getElementById("dashboard").classList.add("hidden");
   document.getElementById("authScreen").classList.remove("hidden");
   document.getElementById("loginPassphrase").value = "";
   showLogin();
 }
 
-// ---- vault records ----
-async function handleAddRecord() {
+function switchTab(which) {
+  document.getElementById("tabNote").classList.toggle("active", which === "note");
+  document.getElementById("tabFile").classList.toggle("active", which === "file");
+  document.getElementById("noteFields").classList.toggle("hidden", which !== "note");
+  document.getElementById("fileFields").classList.toggle("hidden", which !== "file");
+}
+
+async function handleAddNote() {
   const title = document.getElementById("newRecordTitle").value.trim();
   const content = document.getElementById("newRecordContent").value;
   if (!title || !content) return;
-
   const encryptedContent = await encryptString(currentKey, content);
-  const records = getRecords(currentUsername);
-  records.unshift({
-    id: crypto.randomUUID(),
-    title, // titles are NOT encrypted in this simple version — see note below
-    content: encryptedContent,
-    createdAt: new Date().toISOString(),
-  });
-  saveRecords(currentUsername, records);
-
+  await idbAdd({ id: crypto.randomUUID(), username: currentUsername, type: "note", title, content: encryptedContent, createdAt: new Date().toISOString(), sizeBytes: content.length });
   document.getElementById("newRecordTitle").value = "";
   document.getElementById("newRecordContent").value = "";
   await renderRecords();
 }
 
-async function handleDeleteRecord(id) {
-  const records = getRecords(currentUsername).filter(r => r.id !== id);
-  saveRecords(currentUsername, records);
-  await renderRecords();
-}
-
-async function renderRecords() {
-  const records = getRecords(currentUsername);
-  document.getElementById("recordCount").textContent = records.length;
-  const list = document.getElementById("recordList");
-  const emptyNote = document.getElementById("emptyNote");
-
-  if (records.length === 0) {
-    list.innerHTML = "";
-    emptyNote.classList.remove("hidden");
-    return;
+function handleFilePicked() {
+  const input = document.getElementById("fileInput");
+  pickedFile = input.files[0] || null;
+  const infoEl = document.getElementById("filePickedInfo");
+  const uploadBtn = document.getElementById("uploadBtn");
+  if (pickedFile) {
+    infoEl.textContent = `${pickedFile.name} — ${formatBytes(pickedFile.size)}`;
+    infoEl.classList.remove("hidden");
+    uploadBtn.disabled = false;
+  } else {
+    infoEl.classList.add("hidden");
+    uploadBtn.disabled = true;
   }
-  emptyNote.classList.add("hidden");
-
-  let html = "";
-  for (const r of records) {
-    let decryptedContent;
-    try {
-      decryptedContent = await decryptString(currentKey, r.content);
-    } catch (e) {
-      decryptedContent = "[could not decrypt]";
-    }
-    const dateStr = new Date(r.createdAt).toLocaleString();
-    html += `
-      <div class="row">
-        <div>
-          <div class="name">${escapeHtml(r.title)}</div>
-          <div class="meta">${dateStr}</div>
-          <div class="content">${escapeHtml(decryptedContent)}</div>
-        </div>
-        <div class="action" onclick="handleDeleteRecord('${r.id}')">Delete</div>
-      </div>`;
-  }
-  list.innerHTML = html;
 }
 
-function escapeHtml(str) {
-  const div = document.createElement("div");
-  div.textContent = str;
-  return div.innerHTML;
-}
-</script>
+async function handleAddFile() {
+  if (!pickedFile) return;
+  const progressWrap = document.getElementById("progressWrap");
+  const progressBar = document.getElementById("progressBar");
+  progressWrap.classList.remove("hidden");
+  progressBar.style.width = "20%";
 
-</body>
-</html>
+  const arrayBuffer = await pickedFile.arrayBuffer();
+  progressBar.style.width = "55%";
+  const { iv, ciphertext } = await encryptBuffer(currentKey, arrayBuffer);
+  progressBar.style.width = "85%";
 
+  await idbAdd({
+    id: crypto.randomUUID(), username: currentUsername
